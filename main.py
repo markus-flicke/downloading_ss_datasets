@@ -28,12 +28,12 @@ def download_ss_dataset(dataset_name, dataset_savepath):
         data = response_dataset.json()
         # Check if the 'files' key exists in the response
         if 'files' in data:
-            download_links = data['files'][141:]
+            download_links = data['files']
 
             # Download the dataset
             # Note: Datasets might be split into multiple parts. Loop through each part and download.
 
-            for idx, link in tqdm(enumerate(download_links, start=142)): # redo 142,143
+            for idx, link in tqdm(enumerate(download_links, start=1)):
                 response = requests.get(link, headers=headers)
                 with open(f'{dataset_savepath}{dataset_name}_part{idx}.zip', 'wb') as f:
                     f.write(response.content)
