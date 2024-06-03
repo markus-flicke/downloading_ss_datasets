@@ -47,4 +47,4 @@ def download_ss_dataset(dataset_name, dataset_savepath):
 
 
 if __name__=='__main__':
-    download_ss_dataset(dataset_name = "s2orc", dataset_savepath = '/media/scholar/Elements1/')
+    download_ss_dataset(dataset_name = "papers", dataset_savepath = '/media/scholar/cca30a4f-fb5b-4ec5-9bca-8f51dad1364c/papers/')
