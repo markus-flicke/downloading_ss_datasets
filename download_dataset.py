@@ -6,7 +6,10 @@ from tqdm import tqdm
 
 
 
-def download_ss_dataset(dataset_name, dataset_savepath):
+def download_dataset(dataset_name, dataset_savepath):
+    dataset_savepath = os.path.join(dataset_savepath, dataset_name)
+    os.makedirs(dataset_savepath, exist_ok=True)
+
     # Fetch API key from environment variables
     api_key = os.getenv("S2_API_KEY")
     with open('api_key.txt', 'r') as f:
@@ -35,7 +38,8 @@ def download_ss_dataset(dataset_name, dataset_savepath):
 
             for idx, link in tqdm(enumerate(download_links, start=1)):
                 response = requests.get(link, headers=headers)
-                with open(f'{dataset_savepath}{dataset_name}_part{idx}.zip', 'wb') as f:
+                filepath = os.path.join(dataset_savepath, f'{dataset_name}_part{idx}.zip')
+                with open(filepath, 'wb') as f:
                     f.write(response.content)
                 print(f"Downloaded part {idx} of the {dataset_name} dataset.")
             
@@ -47,4 +51,4 @@ def download_ss_dataset(dataset_name, dataset_savepath):
 
 
 if __name__=='__main__':
-    download_ss_dataset(dataset_name = "papers", dataset_savepath = '/media/scholar/cca30a4f-fb5b-4ec5-9bca-8f51dad1364c/papers/')
+    download_dataset(dataset_name = "authors", dataset_savepath = '/media/scholar/cca30a4f-fb5b-4ec5-9bca-8f51dad1364c/')

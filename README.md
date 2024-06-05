@@ -2,10 +2,13 @@
 This readme is dated 03.06.2024.  
 
 ## Download a dataset
-1. Run `main.download_ss_dataset("s2orc")`
+1. Run `download_dataset.download_dataset("s2orc")`
     - Available datasets: `s2orc`, `abstracts`, `authors`, `citations`, `embeddings-specter_v1`, `embeddings-specter_v2`, `paper-ids`, `papers`, `publication-venues`, `tldrs`
 2. Unzip all the downloaded files. For me, Ubuntu's `unzip` didn't work and I used the file explorer's `extract here` option.
 3. The extracted files are in JSON format and I was able to read them using Python's json.load().
+
+## Update a dataset
+https://api.semanticscholar.org/api-docs/datasets#tag/Incremental-Updates
 
 ## Papers
 - `corpusid`:
