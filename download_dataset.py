@@ -6,7 +6,7 @@ from tqdm import tqdm
 
 
 
-def download_dataset(dataset_name, dataset_savepath):
+def download_dataset(dataset_name, dataset_savepath, start_save_idx=1):
     dataset_savepath = os.path.join(dataset_savepath, dataset_name)
     os.makedirs(dataset_savepath, exist_ok=True)
 
@@ -36,7 +36,7 @@ def download_dataset(dataset_name, dataset_savepath):
             # Download the dataset
             # Note: Datasets might be split into multiple parts. Loop through each part and download.
 
-            for idx, link in tqdm(enumerate(download_links, start=1)):
+            for idx, link in tqdm(enumerate(download_links[start_save_idx-1:], start=start_save_idx)):
                 response = requests.get(link, headers=headers)
                 filepath = os.path.join(dataset_savepath, f'{dataset_name}_part{idx}.zip')
                 with open(filepath, 'wb') as f:
@@ -51,4 +51,6 @@ def download_dataset(dataset_name, dataset_savepath):
 
 
 if __name__=='__main__':
-    download_dataset(dataset_name = "authors", dataset_savepath = '/media/scholar/cca30a4f-fb5b-4ec5-9bca-8f51dad1364c/')
+    download_dataset(dataset_name = "abstracts", 
+                     dataset_savepath = '/media/scholar/cca30a4f-fb5b-4ec5-9bca-8f51dad1364c/', 
+                     start_save_idx=38)
