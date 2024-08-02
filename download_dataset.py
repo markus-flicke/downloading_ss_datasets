@@ -38,7 +38,8 @@ def download_dataset(dataset_name, dataset_savepath, start_save_idx=1):
 
             for idx, link in tqdm(enumerate(download_links[start_save_idx-1:], start=start_save_idx)):
                 response = requests.get(link, headers=headers)
-                filepath = os.path.join(dataset_savepath, f'{dataset_name}_part{idx}.zip')
+                print(link)
+                filepath = os.path.join(dataset_savepath, f'{dataset_name}_part{idx}.gz')
                 with open(filepath, 'wb') as f:
                     f.write(response.content)
                 print(f"Downloaded part {idx} of the {dataset_name} dataset.")
@@ -51,6 +52,7 @@ def download_dataset(dataset_name, dataset_savepath, start_save_idx=1):
 
 
 if __name__=='__main__':
-    download_dataset(dataset_name = "abstracts", 
+    download_dataset(dataset_name = "citations", 
                      dataset_savepath = '/media/scholar/cca30a4f-fb5b-4ec5-9bca-8f51dad1364c/', 
-                     start_save_idx=38)
+                     start_save_idx=5)
+    # Downloaded papers, authors, abstracts and citations

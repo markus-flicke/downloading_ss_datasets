@@ -95,3 +95,35 @@ Not all zip files (4,8,14) extracted successfully. Many zip files also extracted
 - `isinfluential`:
 - `contexts`: Contexts in which the citation is made
 - `intents`: example: [['methodology']]
+
+
+# PostgreSQL faster search
+Use indexes on columns that we search in
+## BigInt search
+`CREATE INDEX ON paper_authors (author_id);`
+`CREATE INDEX ON paper_authors (corpus_id);`
+## Text search
+I would like this kind of query to run in under 1sec:  
+`select name, h_index from authors where name like '%Geiger%';`  
+The above query takes 1.9sec on my machine  
+### GIN search
+`CREATE INDEX name_index_gist on authors USING GIST (to_tsvector('english', name));`
+```
+ss_bootstrapping=# select author_id, name, h_index, paper_count, citation_count from authors where to_tsvector('english', name) @@ to_tsquery('english', 'Geiger') order by h_index desc limit 10;;
+ author_id |      name      | h_index | paper_count | citation_count 
+-----------+----------------+---------+-------------+----------------
+   2727510 | B. Geiger      |     109 |         413 |          52896
+  47237027 | Andreas Geiger |      78 |         187 |          49182
+  50370265 | H. Geiger      |      51 |         263 |          10596
+ 145674565 | J. Geiger      |      50 |         223 |          10070
+  74667191 | A. Geiger      |      49 |         154 |           8295
+  33859605 | T. Geiger      |      47 |         139 |          14318
+ 144527211 | D. Geiger      |      47 |         123 |          15638
+  32844974 | H. H. Geiger   |      46 |         203 |           7476
+   4121084 | F. Geiger      |      42 |         239 |           6144
+   1951720 | D. Geiger      |      40 |         111 |           4215
+(10 rows)
+
+Time: 45,304 ms
+Time: 0,029 ms
+```

@@ -7,4 +7,4 @@ def unzip(filepath):
     call(cmd, shell=True)
 
 if __name__=='__main__':
-    unzip('/home/scholar/Desktop/download_ss_dataset/updates/0.zip')
+    unzip('/home/scholar/Desktop/download_ss_dataset/citations/citations_part2.zip')

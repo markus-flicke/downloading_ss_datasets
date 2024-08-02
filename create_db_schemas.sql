@@ -8,7 +8,9 @@ CREATE TABLE papers (
     url TEXT,
     journal TEXT,
     venue TEXT,
-    year INT
+    year INT,
+    citation_count INT,
+    authors text[]
 );
 
 CREATE TABLE authors (
@@ -25,3 +27,6 @@ CREATE TABLE paper_authors (
     PRIMARY KEY (corpus_id, author_id),
     FOREIGN KEY (corpus_id) REFERENCES papers(corpus_id)
 );
+
+ALTER TABLE papers DROP COLUMN citation_count;
+ALTER TABLE papers ADD citation_count INT;
