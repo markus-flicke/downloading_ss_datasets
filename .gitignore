@@ -3,3 +3,6 @@ updates
 deletions
 global_counts.pkl
 ss_boostrapping.sql
+res.pkl
+*.pyc
+*.pkl

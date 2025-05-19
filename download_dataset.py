@@ -52,7 +52,7 @@ def download_dataset(dataset_name, dataset_savepath, start_save_idx=1):
 
 
 if __name__=='__main__':
-    download_dataset(dataset_name = "citations", 
-                     dataset_savepath = '/media/scholar/cca30a4f-fb5b-4ec5-9bca-8f51dad1364c/', 
-                     start_save_idx=5)
+    download_dataset(dataset_name = "papers", 
+                     dataset_savepath = '/home/scholar/s2orc/papers', 
+                     start_save_idx=1)
     # Downloaded papers, authors, abstracts and citations
