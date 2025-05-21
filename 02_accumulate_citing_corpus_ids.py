@@ -31,7 +31,7 @@ def accumulate_cited_corpus_ids():
             else:
                 res[cited_corpus_id].append(item['citingcorpusid'])
             
-        with open('res.pkl', 'wb') as f:
+        with open('citing_corpus_ids.pkl', 'wb') as f:
             pickle.dump(res, f)
 
 
